@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_list/list/add_task_botton_sheet.dart';
 import 'package:to_do_list/list/list_tap.dart';
 import 'package:to_do_list/setting/setting_tap.dart';
+
+import '../provider/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget{
   static const String routeName= 'HomeScreen';
@@ -14,13 +17,16 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0 ;
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProviders>(context);
 
     return Scaffold(
 
       appBar: AppBar(
         toolbarHeight: MediaQuery.of(context).size.height * 0.15,
         title: Text(
-          'To Do List' , style: Theme.of(context).textTheme.titleLarge,
+
+          'To Do List{${authProvider.currentUser!.name}}'
+          , style: Theme.of(context).textTheme.titleLarge,
         ),
 
       ),
